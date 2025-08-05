@@ -1,19 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 
 
-function PoliticiansCard({ name, image, position, biography }) {
-  console.log("render card")
-  return (
-    <div className='card' >
-      <h3> {name} </h3>
-      <img src={image} alt="pol" />
-      <p>{position}</p>
-      <p>{biography}</p>
-    </div>
-  )
-}
-
-
 function App() {
 
   const [politicians, setPolitician] = useState([]);
@@ -21,6 +8,7 @@ function App() {
   const [search, setSearch] = useState("");
 
   const filteredPoliticians = useMemo(() => {
+    console.log("filter")
     return politicians.filter(p => {
       const name = p.name.toLowerCase().includes(search.toLocaleLowerCase())
       const bio = p.biography.toLowerCase().includes(search.toLocaleLowerCase())
@@ -42,10 +30,17 @@ function App() {
     <>
       <h3>Ricerca</h3>
       <input type="text" placeholder='Cerca Politico' value={search} onChange={(e) => setSearch(e.target.value)} />
-      <h2>Lista Politici:</h2>
-      {filteredPoliticians.map((p, i) => (
-        <PoliticiansCard key={i} {...p} />
-      ))}
+      <div className="pol-list">
+        <h2>Lista Politici:</h2>
+        {filteredPoliticians.map((p) => (
+          <div className='card' key={p.id} >
+            <h3> {p.name} </h3>
+            <img src={p.image} alt={p.name} />
+            <p>{p.position}</p>
+            <p>{p.biography}</p>
+          </div>
+        ))}
+      </div>
     </>
   )
 }
