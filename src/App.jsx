@@ -1,5 +1,18 @@
 import { useState, useEffect, useMemo } from 'react'
 
+function PoliticiansCard({ name, image, position, biography }) {
+  console.log("render card")
+  return (
+    <div className="pol-list">
+      <div className='card' >
+        <h3> {name} </h3>
+        <img src={image} alt="pol" />
+        <p>{position}</p>
+        <p>{biography}</p>
+      </div>
+    </div>
+  )
+}
 
 function App() {
 
@@ -33,12 +46,7 @@ function App() {
       <div className="pol-list">
         <h2>Lista Politici:</h2>
         {filteredPoliticians.map((p) => (
-          <div className='card' key={p.id} >
-            <h3> {p.name} </h3>
-            <img src={p.image} alt={p.name} />
-            <p>{p.position}</p>
-            <p>{p.biography}</p>
-          </div>
+          <PoliticiansCard key={p.id} {...p} />
         ))}
       </div>
     </>
