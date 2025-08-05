@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 function PoliticiansCard({ name, image, position, biography }) {
   console.log("render card")
@@ -13,6 +13,8 @@ function PoliticiansCard({ name, image, position, biography }) {
     </div>
   )
 }
+
+const MemoizedPoliticiansCard = React.memo(PoliticiansCard)
 
 function App() {
 
@@ -46,7 +48,7 @@ function App() {
       <div className="pol-list">
         <h2>Lista Politici:</h2>
         {filteredPoliticians.map((p) => (
-          <PoliticiansCard key={p.id} {...p} />
+          <MemoizedPoliticiansCard key={p.id} {...p} />
         ))}
       </div>
     </>
